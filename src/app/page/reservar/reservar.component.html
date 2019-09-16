@@ -1,0 +1,75 @@
+<div class="container margin-top">
+
+    <div *ngIf="show">
+        <form (ngSubmit)="reservar( fsolicitud )" #fsolicitud="ngForm">
+            <div *ngFor="let vuelo of vueloSeleccionado">
+                <div class="form-group row">
+                    <label for="inputdesde" class="col-sm-2 col-form-label">Desde:</label>
+                    <div class="col-sm-10">
+                        <input value="{{vuelo.desde}}" disabled="true" type="text" class="form-control" id="inputdesde" name="inputdesde">
+                        <input type="hidden" [(ngModel)]="vuelo.desde" id="desdet" name="desde" value="{{vuelo.desde}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputhacia" class="col-sm-2 col-form-label">Hacia:</label>
+                    <div class="col-sm-10">
+                        <input value="{{vuelo.hacia}}" disabled="true" type="text" class="form-control" id="inputhacia" name="inputhacia">
+                        <input type="hidden" [(ngModel)]="vuelo.hacia" id="hacia" name="hacia" value="{{vuelo.hacia}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputFecha" class="col-sm-2 col-form-label">Fecha vuelo:</label>
+                    <div class="col-sm-10">
+                        <input value="{{vuelo.fecha_vuelo | date}}" [(ngModel)]="vuelo.desde" disabled="true" type="text" class="form-control" id="inputfecha_vuelo" name="inputfecha_vuelo">
+                        <input type="hidden" [(ngModel)]="vuelo.fecha_vuelo" id="fecha_vuelo" name="fecha_vuelo" value="{{vuelo.fecha_vuelo}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPrecio" class="col-sm-2 col-form-label">Precio:</label>
+                    <div class="col-sm-10">
+                        <input value="{{vuelo.precio_manana}}" disabled="true" type="text" class="form-control" id="inputprecio_manana" name="inputprecio_manana">
+                        <input type="hidden" [(ngModel)]="vuelo.precio_manana" id="precio_manana" name="precio_manana" value="{{vuelo.precio_manana}}">
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" [(ngModel)]="solicitudUser.nombre" id="nombre" name="nombre" placeholder="El nombre de la persona que va a viajar">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputApellido" class="col-sm-2 col-form-label">Apellido:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" [(ngModel)]="solicitudUser.apellido" id="apellido" name="apellido" placeholder="El apellido de la persona que va a viajar">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCedula" class="col-sm-2 col-form-label">Numero cedula:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" [(ngModel)]="solicitudUser.cedula" id="cedula" name="cedula" placeholder="el numero de cedula de la persona que va a viajar">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="pickup_date">Fecha de vuelo</label>
+                    <div class="input-group mb-10 ">
+
+                        <input class="form-control form-control-md" [(ngModel)]="Nacimiento" id="nacimiento" name="nacimiento" #datepickerMDY="bsDatepicker" bsDatepicker [bsConfig]="bsConfig">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-dark btn-picker calendar" (click)="datepickerMDY.toggle()" type="button"></button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary btn-block" (click)="reservar()">Reservar</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
