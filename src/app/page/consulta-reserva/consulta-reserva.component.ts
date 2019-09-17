@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VueloService } from '../../service/vuelo.service';
+import { Reserva } from '../../interfaces/reserva.interface';
 
 @Component({
   selector: 'app-consulta-reserva',
@@ -10,20 +11,27 @@ export class ConsultaReservaComponent implements OnInit {
 
   cedula = '';
   reservas = {};
-  show= false
+  show = false;
 
   constructor(
     private vueloService: VueloService
   ) { }
 
   ngOnInit() {
-    this.show = this.vueloService.tablaReservas;
+    this.show = this.vueloService.tablaReserva;
   }
 
   consultar( cedula ) {
     this.vueloService.getCedula(cedula);
-    this.reservas= this.vueloService.reservas;
-    this.show = this.vueloService.tablaReservas;
+    setTimeout(() => {
+      this.llenarTabla();
+    }, 1500 );
+  }
+
+  llenarTabla() {
+    this.show = this.vueloService.tablaReserva;
+    this.reservas = this.vueloService.reservas;
+    console.log(this.reservas);
   }
 
 }

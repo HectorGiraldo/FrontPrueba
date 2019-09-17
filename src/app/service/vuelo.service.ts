@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Vuelo } from '../interfaces/vuelo.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Reserva } from '../interfaces/reserva.interface';
 
 
 const apiUrl = environment.apiUrl;
@@ -15,8 +16,8 @@ export class VueloService {
   vuelo = {} ;
   vueloSeleccionado: [];
   reserva = false;
-  reservas = []
-  tablaReserva= false;
+  reservas = {};
+  tablaReserva = false;
 
   constructor(
     private http: HttpClient
@@ -77,10 +78,10 @@ export class VueloService {
     getCedula(cedula) {
       const url = apiUrl  + '/reservas';
       const data = cedula;
-      
+
       return this.http.get( `${url}/${data}` ).subscribe(resp => {
-        this.reservas.push(...resp) ;
-        this.tablaReserva= true;
+        this.reservas = resp;
+        this.tablaReserva = true;
         console.log(this.reservas);
       });
     }
